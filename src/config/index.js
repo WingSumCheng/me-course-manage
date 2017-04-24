@@ -3,7 +3,8 @@ const request_host = "";
 
 const user_type = {
 	TEACHER: 1,
-	STUDENT: 2
+	STUDENT: 2,
+	MANAGER: 99
 };
 
 
