@@ -25,6 +25,9 @@ module.exports = function() {
 	router.post("/api/lesson/remove/:id", lesson_controller.remove);
 
 	router.get("/api/notice/list", notice_controller.list);
+	router.post("/api/notice/add/", notice_controller.add);
+	router.post("/api/notice/edit/:id", notice_controller.edit);
+	router.post("/api/notice/remove/:id", notice_controller.remove);
 
 	return router;
 };
