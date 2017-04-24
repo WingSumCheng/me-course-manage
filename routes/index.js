@@ -6,6 +6,7 @@ var path = require("path");
 
 var user_controller = require("../controllers").user;
 var lesson_controller = require("../controllers").lesson;
+var notice_controller = require("../controllers").notice;
 
 module.exports = function() {
 
@@ -22,6 +23,8 @@ module.exports = function() {
 	router.post("/api/lesson/add/", lesson_controller.add);
 	router.post("/api/lesson/edit/:id", lesson_controller.edit);
 	router.post("/api/lesson/remove/:id", lesson_controller.remove);
+
+	router.get("/api/notice/list", notice_controller.list);
 
 	return router;
 };

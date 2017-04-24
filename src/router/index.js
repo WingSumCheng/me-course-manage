@@ -34,6 +34,16 @@ const MemberStudent = function(resolve) {
     }, "Member");
 };
 
+const NoticeList = function(resolve) {
+    NProgress.start();
+    return require.ensure(['@/pages/Notice'], function(component) {
+        var Notice = require("@/pages/Notice");
+        var component = Notice.list;
+        resolve(component);
+        NProgress.done();
+    }, "Notice");
+};
+
 const routes = [
     { path: '/', redirect: '/course/list'},
 
@@ -41,6 +51,8 @@ const routes = [
     { path: '/member/student', component: MemberStudent },
 
     { path: '/course/list', component: CourseList },
+
+    { path: '/notice/list', component: NoticeList }
 ];
 
 module.exports = new Router({
