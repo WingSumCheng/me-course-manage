@@ -42,5 +42,13 @@ module.exports = {
 			where id = ${id}
 		`;
 		connection.query(sql, [], callback);
+	},
+	updatePassword: function(options, callback) {
+		var sql = `
+			update user set
+				password = '${options.new_password}'
+			where id = ${options.id}
+		`;
+		connection.query(sql, [], callback);
 	}
 };

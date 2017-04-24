@@ -171,5 +171,51 @@ module.exports = {
 			user_dao.deleteUserById(id, ep.done("delete_user"));
 		});
 		user_dao.getUserById(id, ep.done("get_user_by_id"));
+	},
+	info: function(req, res, next) {
+		var user = req.session.user || {};
+		return res.send({
+			code: error_code.SUCCESS,
+			data: {
+				user: user
+			},
+			msg: "SUCCESS"
+		});
+	},
+	updatePassword: function(req, res, next) {
+		var id = req.session.user.id,
+			options = req.body;
+
+		options.id = id;
+		var ep = new eventproxy();
+		ep.fail(next);
+		ep.on("check_user", function(rows) {
+			if (rows.length === 0) {
+				return res.send({
+					code: error_code.USER_NOT_FOUND,
+					data: {},
+					msg: "USER_NOT_FOUND"
+				});
+			}
+			var user = rows[0];
+			if (user.password !== options.old_password) {
+				return res.send({
+					code: error_code.WRONG_PASSWORD,
+					data: {},
+					msg: "WRONG_PASSWORD"
+				});
+			}
+			
+			ep.on("update_password", function(rows) {
+				return res.send({
+					code: error_code.SUCCESS,
+					data: {},
+					msg: "SUCCESS"
+				});
+			});
+			user_dao.updatePassword(options, ep.done("update_password"));
+			
+		});
+		user_dao.getUserById(id, ep.done("check_user"));
 	}
 };

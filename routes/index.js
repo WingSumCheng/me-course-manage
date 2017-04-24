@@ -16,8 +16,10 @@ module.exports = function() {
 	router.post("/api/user/login", user_controller.login);
 	router.post("/api/user/add/:type", user_controller.add);
 	router.post("/api/user/edit/:id", user_controller.edit);
+	router.post("/api/user/updatePassword", user_controller.updatePassword);
 	router.post("/api/user/remove/:id", user_controller.remove);
 	router.get("/api/user/list/:type", user_controller.list);
+	router.get("/api/user/info", user_controller.info);
 
 	router.get("/api/lesson/list", lesson_controller.list);
 	router.post("/api/lesson/add/", lesson_controller.add);
