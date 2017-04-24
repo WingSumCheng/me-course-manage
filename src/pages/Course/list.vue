@@ -323,7 +323,7 @@ module.exports = {
 						formatter: function(value, item, index) {
 							return `
 								<button class='btn btn-primary js-course-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger'>删除</button>
+								<button class='btn btn-danger js-course-remove' data-id='${item.id}'>删除</button>
 							`;
 						}
 					}
@@ -399,6 +399,11 @@ module.exports = {
 		vm.$table.on("click", ".js-course-edit", function() {
 			let id = $(this).data('id');
 			vm.showEdit(id);
+		});
+
+		vm.$table.on("click", ".js-course-remove", function() {
+			let id = $(this).data('id');
+			vm.showRemove(id);
 		});
 
 		var ep = new eventproxy();
@@ -525,6 +530,21 @@ module.exports = {
 				}
 			});
 		},
+		requestForRemove() {
+			let vm = this;
+			NProgress.start();
+			this.$store.dispatch("lesson:remove", {
+				id: vm.target_lesson.id,
+				success: function(result) {
+					if (!result.code) {
+						vm.fetchLessonList();
+					}
+				},
+				complete: function() {
+					NProgress.done();
+				}
+			});
+		},
 		showUser(id, type) {
 			this.target_user = this[`${type}_map`][id];
 			this.$user_modal.modal("show");
@@ -543,6 +563,14 @@ module.exports = {
 			});
 			this._getDataFromTarget();
 			this.$course_modal.modal("show");
+		},
+		showRemove(id) {
+			this.target_lesson = this.table_data.find(function(item) {
+				return item.id == id;
+			});
+			if (confirm(`确认删除课程 ${this.target_lesson.name}吗？\n(此操作无法撤销)`)) {
+				this.requestForRemove();
+			}
 		},
 		reset() {
 			this.warning_msg_arr = [];

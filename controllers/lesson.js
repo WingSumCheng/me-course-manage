@@ -76,6 +76,6 @@ module.exports = {
 			});
 			lesson_dao.deleteLessonById(id, ep.done("delete_lesson"));
 		});
-		lesson_dao.getLessonById(id, ep.done("get_user_by_id"));
+		lesson_dao.getLessonById(id, ep.done("get_lesson_by_id"));
 	}
 };
