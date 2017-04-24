@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+.clear {
+    clear: both;
+}
+
+html,
+body {
+    font-size: 16px;
+    font-family: "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
+    background-color: #EEEFF3;
+}
+
+.ellipsis-with-line-num (@num: 1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @num;
+    -webkit-box-orient: vertical;
+}
+
+.background-norm(@elem: "none") {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.rounded-corners (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.transition (@time: .3s) {
+    -webkit-transition: all @time ease-in-out;
+    -moz-transition: all @time ease-in-out;
+    -ms-transition: all @time ease-in-out;
+    -o-transition: all @time ease-in-out;
+    transition: all @time ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -moz-backface-visibility: hidden;
+    -moz-perspective: 1000;
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+.translate (@ver: 0, @hor: 0) {
+    .transform(translate3d(@ver, @hor, 0));
+}
+
+.transform (@str: scale(0, 0)) {
+    transform: @str;
+    -webkit-transform: @str;
+    -moz-transform: @str;
+    -ms-transform: @str;
+    -o-transform: @str;
+}
+
+.overflowScrolling (@num: 0) {
+    -webkit-overflow-scrolling: touch;
+}
+
+.adapt-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .translate(-50%, -60%);
+}
+
+.horizontal-center {
+    position: absolute;
+    left: 50%;
+    .translate(-50%, 0);
+}
+
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    .translate(0, -50%);
+}
+
+.total-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .translate(-50%, -50%);
+}
+
+.left-part {
+    float: left;
+}
+
+.right-part {
+    float: right;
+}
+
+#popout {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.icon {
+    .background-norm();
+    &.icon-calendar {
+        background-size: 16px 16px;
+        width: 16px;
+        height: 16px;
+        background-image: url("../assets/calendar.png");
+    }
+}
+
+@import "./transition.less";
+@import "./nprogress.less";
+@import "./table.less";
+@import "./modal.less";
