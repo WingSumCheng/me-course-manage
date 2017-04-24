@@ -125,7 +125,6 @@ module.exports = {
 			table_selector: ".js-student-list-table",
 			modal_selector: ".js-student-modal",
 			confirm_btn_selector: ".js-confirm-btn",
-			alert_selector: ".js-alert",
 			table_data: [],
 			default_options_for_table: {
 				search: true,
@@ -153,7 +152,7 @@ module.exports = {
 						formatter: function(value, item, index) {
 							return `
 								<button class='btn btn-primary js-student-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger js-teacher-remove' data-id='${item.id}'>删除</button>
+								<button class='btn btn-danger js-student-remove' data-id='${item.id}'>删除</button>
 							`;
 						}
 					}
@@ -173,7 +172,6 @@ module.exports = {
 		vm.$table = $(vm.table_selector);
 		vm.$modal = $(vm.modal_selector);
 		vm.$confirm_btn = $(vm.confirm_btn_selector);
-		vm.$alert = $(vm.alert_selector);
 
 		vm.$table.bootstrapTable("destroy").bootstrapTable(vm.default_options_for_table);
 		vm.$table.bootstrapTable("load", vm.table_data);
@@ -183,7 +181,7 @@ module.exports = {
 			var id = $(this).data("id");
 			vm.showEdit(id);
 		});
-		vm.$table.on("click", ".js-teacher-remove", function() {
+		vm.$table.on("click", ".js-student-remove", function() {
 			var id = $(this).data("id");
 			vm.showRemove(id);
 		});
@@ -203,7 +201,7 @@ module.exports = {
 				complete: function() {
 					NProgress.done();
 				}
-			})
+			});
 		},
 		requestForAdd() {
 			let vm = this;

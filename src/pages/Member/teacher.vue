@@ -125,7 +125,6 @@ module.exports = {
 			table_selector: ".js-teacher-list-table",
 			modal_selector: ".js-teacher-modal",
 			confirm_btn_selector: ".js-confirm-btn",
-			alert_selector: ".js-alert",
 			table_data: [],
 			default_options_for_table: {
 				search: true,
@@ -173,7 +172,6 @@ module.exports = {
 		vm.$table = $(vm.table_selector);
 		vm.$modal = $(vm.modal_selector);
 		vm.$confirm_btn = $(vm.confirm_btn_selector);
-		vm.$alert = $(vm.alert_selector);
 
 		vm.$table.bootstrapTable("destroy").bootstrapTable(vm.default_options_for_table);
 		vm.$table.bootstrapTable("load", vm.table_data);
@@ -203,7 +201,7 @@ module.exports = {
 				complete: function() {
 					NProgress.done();
 				}
-			})
+			});
 		},
 		requestForAdd() {
 			let vm = this;
