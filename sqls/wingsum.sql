@@ -56,6 +56,11 @@ CREATE TABLE IF NOT EXISTS `feedback`(
 insert into user (phone, name, password, sex, type)
     values('15622323113', 'admin', 'fe9000f2d2cabe2c65e99da668fdeea3099b9ef108dfacd02e789b63b7a839b9', 0, 99);
 
+update user set
+    password = 'fe9000f2d2cabe2c65e99da668fdeea3099b9ef108dfacd02e789b63b7a839b9'
+where
+    id = 1;
+
 /* notice */
 insert into notice (content, user_id)
     values('蛤蛤', 1)
