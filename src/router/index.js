@@ -44,6 +44,16 @@ const NoticeList = function(resolve) {
     }, "Notice");
 };
 
+const UserInfo = function(resolve) {
+    NProgress.start();
+    return require.ensure(['@/pages/User'], function(component) {
+        var User = require("@/pages/User");
+        var component = User.info;
+        resolve(component);
+        NProgress.done();
+    }, "User");
+};
+
 const routes = [
     { path: '/', redirect: '/course/list'},
 
@@ -52,7 +62,9 @@ const routes = [
 
     { path: '/course/list', component: CourseList },
 
-    { path: '/notice/list', component: NoticeList }
+    { path: '/notice/list', component: NoticeList },
+
+    { path: '/user/info', component: UserInfo}
 ];
 
 module.exports = new Router({

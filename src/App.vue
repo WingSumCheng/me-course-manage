@@ -17,7 +17,7 @@ module.exports = {
     },
     created() {
         var phone = "15622323113",
-            password = "admin";
+            password = "123456";
         this.$store.dispatch("user:login", {
             phone: phone,
             password: getPassword(phone, password),

@@ -61,6 +61,28 @@ const user = {
                 }
             });
         },
+        "user:info": function(context, payload) {
+            $.ajax({
+                url: getRequestURL(`/api/user/info`),
+                type: "GET",
+                success: function(result) {
+                    if (result.code) {
+                        alert(result.msg);
+                    }
+                    var success = payload.success || function(result) {
+
+                    };
+                    success(result);
+                },
+                complete: function() {
+    
+                    var complete = payload.complete || function() {
+
+                    };
+                    complete();
+                }
+            });
+        },
          "user:add": function(context, payload) {
             $.ajax({
                 url: getRequestURL(`/api/user/add/${payload.type}`),
@@ -87,6 +109,29 @@ const user = {
         "user:edit": function(context, payload) {
             $.ajax({
                 url: getRequestURL(`/api/user/edit/${payload.id}`),
+                type: "POST",
+                data: payload.user,
+                success: function(result) {
+                    if (result.code) {
+                        alert(result.msg);
+                    }
+                    var success = payload.success || function(result) {
+
+                    };
+                    success(result);
+                },
+                complete: function() {
+    
+                    var complete = payload.complete || function() {
+
+                    };
+                    complete();
+                }
+            });
+        },
+        "user:update-password": function(context, payload) {
+            $.ajax({
+                url: getRequestURL(`/api/user/updatePassword`),
                 type: "POST",
                 data: payload.user,
                 success: function(result) {
