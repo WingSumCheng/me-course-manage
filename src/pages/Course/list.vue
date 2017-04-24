@@ -1,15 +1,15 @@
 <template>
-	<div id='course-list'>
-		<div id='course-list-table-container'>
+	<div id='lesson-list'>
+		<div id='lesson-list-table-container'>
 			<button
 				class='add-btn btn btn-success'
 				style="width:140px"
 				@click="showAdd"
 			>添加课程</button>
-			<table class='table table-hover js-course-list-table' valign="center" align="center"></table>
+			<table class='table table-hover js-lesson-list-table' valign="center" align="center"></table>
 		</div>
-		<div id='course-user-modal-container'>
-			<div class="modal fade js-course-user-modal">
+		<div id='lesson-user-modal-container'>
+			<div class="modal fade js-lesson-user-modal">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -33,8 +33,8 @@
 				</div>
             </div>
 		</div>
-		<div id='course-modal-container'>
-			<div class="modal fade js-course-modal">
+		<div id='lesson-modal-container'>
+			<div class="modal fade js-lesson-modal">
 				<div class="modal-dialog modal-m" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -211,7 +211,7 @@ var user_type = require("@/config").user_type;
 
 let vm;
 module.exports = {
-	name: 'course-list',
+	name: 'lesson-list',
 	computed: {
 		warning_msg: function() {
 			return this.warning_msg_arr.join("</br>");
@@ -227,16 +227,16 @@ module.exports = {
 		return {
 			$table: null,
 			$user_modal: null,
-			$course_modal: null,
+			$lesson_modal: null,
 			$confirm_btn: null,
 
 			$start_time: null,
 			$end_time: null,
 			$start_date: null,
 			$end_date: null,
-			table_selector: ".js-course-list-table",
-			user_modal_selector: ".js-course-user-modal",
-			course_modal_selector: ".js-course-modal",
+			table_selector: ".js-lesson-list-table",
+			user_modal_selector: ".js-lesson-user-modal",
+			lesson_modal_selector: ".js-lesson-modal",
 			confirm_btn_selector: ".js-confirm-btn",
 
 			start_time_selector: ".js-class-time-start-time",
@@ -322,8 +322,8 @@ module.exports = {
 						title: "操作",
 						formatter: function(value, item, index) {
 							return `
-								<button class='btn btn-primary js-course-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger js-course-remove' data-id='${item.id}'>删除</button>
+								<button class='btn btn-primary js-lesson-edit' data-id='${item.id}'>修改</button>
+								<button class='btn btn-danger js-lesson-remove' data-id='${item.id}'>删除</button>
 							`;
 						}
 					}
@@ -356,7 +356,7 @@ module.exports = {
 		vm = this;
 		vm.$user_modal = $(vm.user_modal_selector);
 		vm.$table = $(vm.table_selector);
-		vm.$course_modal = $(vm.course_modal_selector);
+		vm.$lesson_modal = $(vm.lesson_modal_selector);
 
 		vm.$confirm_btn = $(vm.confirm_btn_selector);
 
@@ -396,12 +396,12 @@ module.exports = {
 			vm.showUser(id, "student");
 		});
 
-		vm.$table.on("click", ".js-course-edit", function() {
+		vm.$table.on("click", ".js-lesson-edit", function() {
 			let id = $(this).data('id');
 			vm.showEdit(id);
 		});
 
-		vm.$table.on("click", ".js-course-remove", function() {
+		vm.$table.on("click", ".js-lesson-remove", function() {
 			let id = $(this).data('id');
 			vm.showRemove(id);
 		});
@@ -493,7 +493,7 @@ module.exports = {
 				},
 				success: function(result) {
 					if (!result.code) {
-						vm.$course_modal.modal("hide");
+						vm.$lesson_modal.modal("hide");
 						vm.fetchLessonList();
 					}
 				},
@@ -520,7 +520,7 @@ module.exports = {
 				id: vm.target_lesson.id,
 				success: function(result) {
 					if (!result.code) {
-						vm.$course_modal.modal("hide");
+						vm.$lesson_modal.modal("hide");
 						vm.fetchLessonList();
 					}
 				},
@@ -552,17 +552,16 @@ module.exports = {
 		showAdd() {
 			this.state = "add";
 			this.reset();
-			this.$course_modal.modal("show");
+			this.$lesson_modal.modal("show");
 		},
 		showEdit(id) {
 			this.state = "edit";
 			this.reset();
-			console.log(id, this.table_data);
 			this.target_lesson = this.table_data.find(function(item) {
 				return item.id == id;
 			});
 			this._getDataFromTarget();
-			this.$course_modal.modal("show");
+			this.$lesson_modal.modal("show");
 		},
 		showRemove(id) {
 			this.target_lesson = this.table_data.find(function(item) {
