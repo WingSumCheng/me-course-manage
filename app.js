@@ -38,7 +38,7 @@ app.use(session({
 
 
 var auth_ignore = [
-	"/api/user/login"
+	"/user/login"
 ];
 
 
@@ -48,14 +48,15 @@ app.use(function(req, res, next) {
 	return next();
 });
 
-app.use(express.static('dist'));
+
+app.use("/api", middlewares.auth(auth_ignore));
+
+app.use(route);
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());
 
-app.use(middlewares.auth(auth_ignore));
-
-app.use(route);
+app.use(express.static('dist'));
 
 
 
