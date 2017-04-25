@@ -5,6 +5,7 @@
 				class='add-btn btn btn-success'
 				style="width:140px"
 				@click="showAdd"
+				v-if="user_info.type === 99"
 			>添加教师</button>
 			<table class='table table-hover js-teacher-list-table' valign="center" align="center"></table>
 		</div>
@@ -91,6 +92,7 @@
 		                    >确定</button>
 		                </div>
 					</div>
+					{{user_info}}
 				</div>
             </div>
 		</div>
@@ -115,6 +117,10 @@ module.exports = {
 				return "添加教师";
 			}
 			return "修改教师";
+		},
+		user_info: function() {
+			let user_info = this.$store.state.user.user_info;
+			return user_info;
 		}
 	},
 	data() {
@@ -126,6 +132,16 @@ module.exports = {
 			modal_selector: ".js-teacher-modal",
 			confirm_btn_selector: ".js-confirm-btn",
 			table_data: [],
+			operation_column: {
+				field: "operation",
+				title: "操作",
+				formatter: function(value, item, index) {
+					return `
+						<button class='btn btn-primary js-teacher-edit' data-id='${item.id}'>修改</button>
+						<button class='btn btn-danger js-teacher-remove' data-id='${item.id}'>删除</button>
+					`;
+				}
+			},
 			default_options_for_table: {
 				search: true,
 				pagination: true,
@@ -145,17 +161,7 @@ module.exports = {
 							}
 						}
 					},
-					{ field: "phone", title: "手机号（账号）", sortable: true},
-					{
-						field: "operation",
-						title: "操作",
-						formatter: function(value, item, index) {
-							return `
-								<button class='btn btn-primary js-teacher-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger js-teacher-remove' data-id='${item.id}'>删除</button>
-							`;
-						}
-					}
+					{ field: "phone", title: "手机号（账号）", sortable: true}
 				]
 			},
 			model_name: "",
@@ -185,6 +191,8 @@ module.exports = {
 			var id = $(this).data("id");
 			vm.showRemove(id);
 		});
+
+		this._checkUserType();
 	},
 	methods: {
 		fetchTeacherList() {
@@ -234,7 +242,7 @@ module.exports = {
 			this.$store.dispatch("user:edit", {
 				user: {
 					sex: vm.model_sex,
-					password: getPassword(vm.model_phone, vm.model_password),
+					password: getPassword(vm.target.phone, vm.model_password),
 					name: vm.model_name
 				},
 				id: vm.target.id,
@@ -326,6 +334,26 @@ module.exports = {
 			} else {
 				this.requestForEdit();
 			}
+		},
+		_checkUserType() {
+			let vm = this,
+				user_info = this.user_info;
+			if (
+				user_info.type
+			&& 	user_info.type === 1
+			) {
+				this.$router.push("/main/user/info");
+			}
+			if (user_info.type === 99) {
+				vm.default_options_for_table.columns.push(vm.operation_column);
+				vm.$table.bootstrapTable("destroy").bootstrapTable(vm.default_options_for_table);
+				vm.$table.bootstrapTable("load", vm.table_data);
+			}
+		}
+	},
+	watch: {
+		"user_info": function(newData, oldData) {
+			this._checkUserType();
 		}
 	}
 }

@@ -126,7 +126,8 @@ module.exports = {
 			return this.warning_msg_arr.join("</br>");
 		},
 		user_info: function() {
-			return this.$store.state.user.user_info;
+			let user_info = this.$store.state.user.user_info;
+			return user_info;
 		}
 	},
 	data() {

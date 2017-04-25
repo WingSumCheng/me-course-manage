@@ -5,6 +5,7 @@
 				class='add-btn btn btn-success'
 				style="width:140px"
 				@click="showAdd"
+				v-if="user_info.type === 99 || user_info.type === 1"
 			>添加课程</button>
 			<table class='table table-hover js-lesson-list-table' valign="center" align="center"></table>
 		</div>
@@ -64,7 +65,7 @@
 		                					id="teacher"
 		                				>
 		                					<option
-		                						v-for="teacher in teacher_arr"
+		                						v-for="teacher in teacher_arr_with_auth"
 		                						:value="teacher.id"
 		                					>{{teacher.name}}({{teacher.phone}})</option>
 		                				</select>
@@ -221,6 +222,21 @@ module.exports = {
 				return "添加课程";
 			}
 			return "修改课程";
+		},
+		user_info: function() {
+			let user_info = this.$store.state.user.user_info;
+			return user_info;
+		},
+		teacher_arr_with_auth: function() {
+			let user_info = this.user_info,
+				teacher_arr = this.teacher_arr;
+			if (
+				user_info.type
+			&& 	user_info.type === 1
+			) {
+				return [user_info];
+			}
+			return teacher_arr;
 		}
 	},
 	data() {
@@ -261,6 +277,16 @@ module.exports = {
 			model_class_time_start_date: "",
 			model_class_time_end_date: "",
 			model_class_room: "",
+			operation_column: {
+				field: "operation",
+				title: "操作",
+				formatter: function(value, item, index) {
+					return `
+						<button class='btn btn-primary js-lesson-edit' data-id='${item.id}'>修改</button>
+						<button class='btn btn-danger js-lesson-remove' data-id='${item.id}'>删除</button>
+					`;
+				}
+			},
 			default_options_for_table: {
 				search: true,
 				pagination: true,
@@ -315,16 +341,6 @@ module.exports = {
 								temp = vm.student_map[value].name;
 							}
 							return `<a href='javascript: void 0;' class='js-student-detail' data-id='${value}'>${temp}</a>`;
-						}
-					},
-					{
-						field: "operation",
-						title: "操作",
-						formatter: function(value, item, index) {
-							return `
-								<button class='btn btn-primary js-lesson-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger js-lesson-remove' data-id='${item.id}'>删除</button>
-							`;
 						}
 					}
 				]
@@ -413,6 +429,7 @@ module.exports = {
 		vm.fetchTeacherList(ep.done("fetch_teacher_list"));
 		vm.fetchStudentList(ep.done("fetch_student_list"));
 		vm.fetchLessonList(ep.done("fetch_lesson_list"));
+		this._checkUserType();
 	},
 	beforeDestroy() {
 		this.$start_time.data("datetimepicker").remove();
@@ -656,6 +673,22 @@ module.exports = {
 		},
 		_disableKeypress(e) {
 			e.preventDefault();
+		},
+		_checkUserType() {
+			let vm = this;
+			if (
+				this.user_info.type === 1
+			|| 	this.user_info.type === 99
+			) {
+				vm.default_options_for_table.columns.push(vm.operation_column);
+				vm.$table.bootstrapTable("destroy").bootstrapTable(vm.default_options_for_table);
+				vm.$table.bootstrapTable("load", vm.table_data);
+			}
+		}
+	},
+	watch: {
+		"user_info": function() {
+			this._checkUserType();
 		}
 	}
 }

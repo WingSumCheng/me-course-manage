@@ -5,6 +5,7 @@
 				class='add-btn btn btn-success'
 				style="width:140px"
 				@click="showAdd"
+				v-if="user_info.type === 99 || user_info.type === 1"
 			>发布公告</button>
 			<table class='table table-hover js-notice-list-table' valign="center" align="center"></table>
 		</div>
@@ -102,6 +103,10 @@ module.exports = {
 				return "添加公告";
 			}
 			return "修改公告";
+		},
+		user_info: function() {
+			let user_info = this.$store.state.user.user_info;
+			return user_info;
 		}
 	},
 	data() {
@@ -174,10 +179,18 @@ module.exports = {
 						field: "operation",
 						title: "操作",
 						formatter: function(value, item, index) {
-							return `
-								<button class='btn btn-primary js-notice-edit' data-id='${item.id}'>修改</button>
-								<button class='btn btn-danger js-notice-remove' data-id='${item.id}'>删除</button>
-							`;
+							let temp = "",
+								user_info = vm.user_info;
+							if (
+								user_info.type === 99
+							|| 	user_info.id === item.user_id
+							) {
+								temp = `
+									<button class='btn btn-primary js-notice-edit' data-id='${item.id}'>修改</button>
+									<button class='btn btn-danger js-notice-remove' data-id='${item.id}'>删除</button>
+								`;
+							}
+							return temp;
 						}
 					}
 				]
@@ -211,6 +224,7 @@ module.exports = {
 
 		vm.fetchPublisherList();
 		vm.fetchNoticeList();
+		this._checkUserType();
 	},
 	methods: {
 		fetchPublisherList() {
@@ -372,6 +386,14 @@ module.exports = {
 			} else {
 				this.requestForEdit();
 			}
+		},
+		_checkUserType() {
+			vm.$table.bootstrapTable("load", vm.table_data);
+		}
+	},
+	watch: {
+		"user_info": function() {
+			this._checkUserType();
 		}
 	}
 }
