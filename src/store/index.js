@@ -10,6 +10,7 @@ Vue.use(Vuex);
 const user = require("./modules/user");
 const lesson = require("./modules/lesson");
 const notice = require("./modules/notice");
+const feedback = require("./modules/feedback");
 
 const store = new Vuex.Store({
     state: state,
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     modules: {
     	user: user,
     	lesson: lesson,
-    	notice: notice
+    	notice: notice,
+    	feedback: feedback
     }
 });
 
