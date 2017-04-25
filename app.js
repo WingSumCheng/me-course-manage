@@ -48,14 +48,18 @@ app.use(function(req, res, next) {
 	return next();
 });
 
-app.use(middlewares.auth(auth_ignore));
-
-app.use(route);
+app.use(express.static('dist'));
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());
 
-app.use(express.static('dist'));
+app.use(middlewares.auth(auth_ignore));
+
+app.use(route);
+
+
+
+
 
 
 

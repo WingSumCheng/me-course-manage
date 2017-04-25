@@ -44,7 +44,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('me-course-manage/img/[name].[hash:7].[ext]')
         }
       },
       {
@@ -52,7 +52,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('me-course-manage/fonts/[name].[hash:7].[ext]')
         }
       }
     ]
