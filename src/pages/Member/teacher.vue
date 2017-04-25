@@ -92,7 +92,6 @@
 		                    >确定</button>
 		                </div>
 					</div>
-					{{user_info}}
 				</div>
             </div>
 		</div>
