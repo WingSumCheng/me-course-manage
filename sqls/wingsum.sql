@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `feedback`(
     `content` varchar(255) NOT NULL,
     `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    constraint `FK_lesson_id` foreign key(`lesson_id`) references `lesson`(`id`) on delete cascade
+    constraint `FK_lesson_id` foreign key(`lesson_id`) references `lesson`(`id`) on delete cascade,
+    UNIQUE('lesson_id')
 ) CHARACTER SET `utf8mb4`;
 
 
