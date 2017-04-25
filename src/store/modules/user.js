@@ -1,4 +1,7 @@
-var getRequestURL = require("@/utils").getRequestURL;
+var utils = require("@/utils");
+var getRequestURL = utils.getRequestURL;
+var successForRequest = utils.successForRequest;
+var completeForRequest = utils.completeForRequest;
 
 const user = {
     state: {
@@ -22,20 +25,10 @@ const user = {
                 },
                 type: "POST",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -44,20 +37,10 @@ const user = {
                 url: getRequestURL(`/api/user/list/${payload.type}`),
                 type: "GET",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -66,20 +49,10 @@ const user = {
                 url: getRequestURL(`/api/user/info`),
                 type: "GET",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -89,20 +62,10 @@ const user = {
                 type: "POST",
                 data: payload.user,
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -112,20 +75,10 @@ const user = {
                 type: "POST",
                 data: payload.user,
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -135,20 +88,10 @@ const user = {
                 type: "POST",
                 data: payload.user,
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         },
@@ -157,20 +100,10 @@ const user = {
                 url: getRequestURL(`/api/user/remove/${payload.id}`),
                 type: "POST",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         }

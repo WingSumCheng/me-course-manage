@@ -1,5 +1,7 @@
-var getRequestURL = require("@/utils").getRequestURL;
-
+var utils = require("@/utils");
+var getRequestURL = utils.getRequestURL;
+var successForRequest = utils.successForRequest;
+var completeForRequest = utils.completeForRequest;
 
 const lesson = {
 	state: {},
@@ -11,20 +13,10 @@ const lesson = {
                 url: getRequestURL(`/api/lesson/list`),
                 type: "GET",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
 		},
@@ -34,20 +26,10 @@ const lesson = {
                 type: "POST",
                 data: payload.lesson,
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
 		},
@@ -57,20 +39,10 @@ const lesson = {
                 type: "POST",
                 data: payload.lesson,
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
 		},
@@ -79,20 +51,10 @@ const lesson = {
                 url: getRequestURL(`/api/lesson/remove/${payload.id}`),
                 type: "POST",
                 success: function(result) {
-                    if (result.code) {
-                        alert(result.msg);
-                    }
-                    var success = payload.success || function(result) {
-
-                    };
-                    success(result);
+                    successForRequest(result, payload)
                 },
                 complete: function() {
-    
-                    var complete = payload.complete || function() {
-
-                    };
-                    complete();
+                    completeForRequest(payload)
                 }
             });
         }
