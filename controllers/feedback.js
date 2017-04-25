@@ -50,5 +50,21 @@ module.exports = {
 		lesson_dao.getLessonByUserId(null, ep.done("fetch_lesson"));
 		user_dao.getUserByType(1, ep.done("fetch_teacher"));
 		user_dao.getUserByType(2, ep.done("fetch_student"));
+	},
+	add: function(req, res, next) {
+		var options = req.body;
+
+		var ep = new eventproxy();
+
+		ep.fail(next);
+
+		ep.on("insert_feedback", function() {
+			return res.send({
+				code: error_code.SUCCESS,
+				data: {},
+				msg: "SUCCESS"
+			});
+		});
+		feedback_dao.insertFeedback(options, ep.done("insert_feedback"));
 	}
 };

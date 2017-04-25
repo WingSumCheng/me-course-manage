@@ -33,6 +33,7 @@ module.exports = function() {
 	router.post("/api/notice/remove/:id", notice_controller.remove);
 
 	router.get("/api/feedback/list", feedback_controller.list);
+	router.post("/api/feedback/add", feedback_controller.add);
 
 	return router;
 };
