@@ -414,6 +414,12 @@ module.exports = {
 		vm.fetchStudentList(ep.done("fetch_student_list"));
 		vm.fetchLessonList(ep.done("fetch_lesson_list"));
 	},
+	beforeDestroy() {
+		this.$start_time.data("datetimepicker").remove();
+		this.$end_time.data("datetimepicker").remove();
+		this.$start_date.data("datetimepicker").remove();
+		this.$end_date.data("datetimepicker").remove();
+	},
 	methods: {
 		fetchLessonList(callback) {
 			let vm = this;
