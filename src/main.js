@@ -9,7 +9,7 @@ const moment = require('moment');
 
 window.eventproxy = eventproxy;
 window.moment = moment;
-
+console.log(router);
 require("./common");
 require("./style/index.less");
 

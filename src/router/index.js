@@ -6,6 +6,8 @@ Vue.use(Router)
 
 const Main = require("@/Main.vue");
 
+const Login = require("@/Login.vue");
+
 const CourseList = function(resolve) {
     NProgress.start();
     return require.ensure(['@/pages/Course'], function(component) {
@@ -71,9 +73,13 @@ const routes = [
 
             { path: 'notice/list', component: NoticeList },
 
-            { path: 'user/info', component: UserInfo}
+            { path: 'user/info', component: UserInfo},
+
+            { path: '*', component: NoticeList }
         ]
     },
+
+    { path: '/login/index', component: Login}
 
 ];
 

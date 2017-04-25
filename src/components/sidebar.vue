@@ -54,7 +54,7 @@ module.exports = {
 		}
 	},
 	created() {
-		console.log(this);
+
 	},
 	components: {
 		"sidebar-link": require("./sidebar-link")

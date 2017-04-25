@@ -16,7 +16,7 @@ module.exports = {
         mainbar: require("@/components/mainbar")
     },
     created() {
-        console.log(this);
+        
     }
 }
 </script>
