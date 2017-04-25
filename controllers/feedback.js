@@ -25,11 +25,12 @@ module.exports = {
 				let temp = [];
 
 				feedbacks.forEach(function(item) {
+					let lesson = lesson_map[item.lesson_id];
 					temp.push({
-						lesson_name: lesson_map[item.lesson_id].name,
+						lesson_name: lesson.name,
 						content: item.content,
-						student_name: user_map[item.student_id].name,
-						teacher_name: user_map[item.teacher_id].name,
+						student_name: user_map[lesson.student_id].name,
+						teacher_name: user_map[lesson.teacher_id].name,
 						id: item.id,
 						create_time: item.create_time,
 						update_time: item.update_time
