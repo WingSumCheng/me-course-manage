@@ -73,3 +73,6 @@ update notice
 insert into lesson (teacher_id, student_id, name, class_time, start_date, end_date, class_room)
     values (11, 7, '拉丁舞', '1,10:00,12:00', '2017-03-26', '2017-08-03', 'D301')
 
+insert into feedback (lesson_id, content)
+    values (1, '老师讲课语速有点快')
+
