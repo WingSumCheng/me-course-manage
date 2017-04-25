@@ -5,15 +5,17 @@ var completeForRequest = utils.completeForRequest;
 
 const user = {
     state: {
-        profile: null
-    },
-    getters: {
-        user: function(state, getters, rootState) {
-
+        user_info: {
+            type: 0
         }
     },
-    mutations: {
+    getters: {
 
+    },
+    mutations: {
+        "user:set-info": function(state, payload) {
+            state.user_info = payload.user;
+        }
     },
     actions: {
         "user:login": function(context, payload) {

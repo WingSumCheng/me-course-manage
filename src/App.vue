@@ -12,8 +12,7 @@ var getPassword = require("@/utils").getPassword;
 
 module.exports = {
     name: 'app',
-    created() {
-    }
+    created() {}
 }
 </script>
 

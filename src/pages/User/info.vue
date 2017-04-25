@@ -124,11 +124,13 @@ module.exports = {
 	computed: {
 		warning_msg: function() {
 			return this.warning_msg_arr.join("</br>");
+		},
+		user_info: function() {
+			return this.$store.state.user.user_info;
 		}
 	},
 	data() {
 		return {
-			user_info: {},
 
 			$modal: null,
 			$confirm_btn: null,
@@ -146,7 +148,6 @@ module.exports = {
 	},
 	mounted() {
 		let vm = this;
-		this.fetchUserInfo();
 		vm.$modal = $(vm.modal_selector);
 		vm.$confirm_btn = $(vm.confirm_btn_selector);
 	},
@@ -157,7 +158,9 @@ module.exports = {
 			this.$store.dispatch("user:info", {
 				success: function(result) {
 					if (!result.code) {
-						vm.user_info = result.data.user;
+						vm.$store.commit("user:set-info", {
+							user: result.data.user
+						});
 					}
 				},
 				complete: function() {

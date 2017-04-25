@@ -16,7 +16,19 @@ module.exports = {
         mainbar: require("@/components/mainbar")
     },
     created() {
-        
+        let vm = this;
+        this.$store.dispatch("user:info", {
+            success: function(result) {
+                if (!result.code) {
+                    vm.$store.commit("user:set-info", {
+                        user: result.data.user
+                    });
+                }
+            },
+            complete: function() {
+                NProgress.done();
+            }
+        });
     }
 }
 </script>
