@@ -21,27 +21,27 @@ const links = [
 	{
 		title: "用户管理",
 		contents: [
-			{ name: "教师管理", link: "/member/teacher"},
-			{ name: "学生管理", link: "/member/student"}
+			{ name: "教师管理", link: "/main/member/teacher"},
+			{ name: "学生管理", link: "/main/member/student"}
 		]
 	},
 	{
 		title: "课程管理",
 		contents: [
-			{ name: "课程列表", link: "/course/list"},
-			{ name: "反馈列表", link: "/course/feedback"},
+			{ name: "课程列表", link: "/main/course/list"},
+			{ name: "反馈列表", link: "/main/course/feedback"},
 		]
 	},
 	{
 		title: "公告管理",
 		contents: [
-			{ name: "公告列表", link: "/notice/list"}
+			{ name: "公告列表", link: "/main/notice/list"}
 		]
 	},
 	{
 		title: "个人管理",
 		contents: [
-			{ name: "个人信息", link: "/user/info"}
+			{ name: "个人信息", link: "/main/user/info"}
 		]
 	}
 ];

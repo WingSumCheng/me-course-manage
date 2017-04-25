@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        <sidebar/>
-        <mainbar/>
+        <router-view/>
     </div>
 </template>
 
@@ -11,10 +10,6 @@ var getPassword = require("@/utils").getPassword;
 
 module.exports = {
     name: 'app',
-    components: {
-        sidebar: require("./components/sidebar"),
-        mainbar: require("./components/mainbar")
-    },
     created() {
         var phone = "15622323113",
             password = "123456";

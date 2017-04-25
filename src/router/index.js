@@ -4,6 +4,8 @@ import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
+const Main = require("@/Main.vue");
+
 const CourseList = function(resolve) {
     NProgress.start();
     return require.ensure(['@/pages/Course'], function(component) {
@@ -54,17 +56,25 @@ const UserInfo = function(resolve) {
     }, "User");
 };
 
+
 const routes = [
-    { path: '/', redirect: '/course/list'},
+    { path: '/', redirect: '/main/course/list'},
 
-    { path: '/member/teacher', component: MemberTeacher },
-    { path: '/member/student', component: MemberStudent },
+    {
+        path: "/main",
+        component: Main,
+        children: [
+            { path: 'member/teacher', component: MemberTeacher },
+            { path: 'member/student', component: MemberStudent },
 
-    { path: '/course/list', component: CourseList },
+            { path: 'course/list', component: CourseList },
 
-    { path: '/notice/list', component: NoticeList },
+            { path: 'notice/list', component: NoticeList },
 
-    { path: '/user/info', component: UserInfo}
+            { path: 'user/info', component: UserInfo}
+        ]
+    },
+
 ];
 
 module.exports = new Router({
