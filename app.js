@@ -37,13 +37,9 @@ app.use(session({
 }));
 
 
-var auth_callback_match = {
-	"/api/user/add": function(user) {
-		return user.type === 99
-	}
-};
-
-var need_auth_arr = Object.keys(auth_callback_match);
+var auth_ignore = [
+	"/api/user/login"
+];
 
 
 app.use(function(req, res, next) {
@@ -52,7 +48,7 @@ app.use(function(req, res, next) {
 	return next();
 });
 
-app.use(need_auth_arr, middlewares.auth(auth_callback_match));
+app.use(middlewares.auth(auth_ignore));
 
 app.use(route);
 
