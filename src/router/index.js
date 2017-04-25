@@ -18,6 +18,16 @@ const CourseList = function(resolve) {
     }, "Course");
 };
 
+const CourseFeedback = function(resolve) {
+    NProgress.start();
+    return require.ensure(['@/pages/Course'], function(component) {
+        var Course = require("@/pages/Course");
+        var component = Course.feedback;
+        resolve(component);
+        NProgress.done();
+    }, "Course");
+};
+
 const MemberTeacher = function(resolve) {
     NProgress.start();
     return require.ensure(['@/pages/Member'], function(component) {
@@ -70,6 +80,7 @@ const routes = [
             { path: 'member/student', component: MemberStudent },
 
             { path: 'course/list', component: CourseList },
+            { path: 'course/feedback', component: CourseFeedback },
 
             { path: 'notice/list', component: NoticeList },
 

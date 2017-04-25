@@ -53,7 +53,7 @@
                                 style="width:120px"
                                 @click="_confirmBtnClickEvent"
                                 data-loading-text="提交中......"
-                            >确定</button>
+                            >登录</button>
                         </div>
                     </div>
                 </div>

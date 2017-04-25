@@ -365,7 +365,7 @@ module.exports = {
 				"周四",
 				"周五",
 				"周六",
-			],
+			]
 		}
 	},
 	mounted() {
